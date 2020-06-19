@@ -3,48 +3,64 @@ import csv
 
 # define file path
 bank_csv = os.path.join('Resources', 'budget_data.csv')
+bank_output_file = os.path.join('Analysis', 'PyBank_output_file.txt')
 #print(bank_csv)
+
 # define variables
 total_months = 0
 total_profit_loss = 0
 greatest_inc = 0
-#monthly_change = []
 greatest_dec = 0
 
 # Read in the CSV file
 with open(bank_csv , 'r') as csvfile:
-    csvreader = csv.reader(csvfile, delimiter=",")
+    csvreader = csv.reader(csvfile, delimiter=",") #make sure that your referencing the proper variables/files
     header = next(csvreader)
     print(csvreader)
-
  
-# start the loop
+    # start the for loop
     for row in csvreader: #can also use line
-# The total number of months included in the dataset
+
+        # The total number of months included in the dataset
         total_months = total_months + 1
-        #print(total_months)
-# The net total amount of "Profit/Losses" over the entire period
+
+        # The net total amount of "Profit/Losses" over the entire period
         total_profit_loss += int(row[1])
 
-# The average of the changes in "Profit/Losses" over the entire period
-        #store all the numbers in a list; count the length of the list; then use a function 'def (pl_avg)' to output and "call" a value
+        # The average of the changes in "Profit/Losses" over the entire period
         average_pl = total_profit_loss / total_months
-        #print(row[1])
-#print(average_pl)
-#print(total_profit_loss)
-#print(total_months)
-# The greatest increase in profits (date and amount) over the entire period
+
+        # The greatest increase in profits (date and amount) over the entire period
         #start with the greatest_inc = 0 then with each line, if row[1] > greatest_inc: greatest_inc = row[1]
         if float(row[1]) > greatest_inc:
-                greatest_inc = float(row[1])
+                greatest_inc = float(row[1]) #make sure both values are float types due to decimal points
                 greatest_inc_date = row[0]
-#print(greatest_inc_date)
-#print(greatest_inc)
-# The greatest decrease in losses (date and amount) over the entire period
-         #start with the greatest_inc = 0 then with each line, if row[1] > greatest_inc: greatest_inc = row[1]
+
+        # The greatest decrease in losses (date and amount) over the entire period
+        #start with the greatest_dec = 0 then with each line, if row[1] < greatest_dec: greatest_dec = row[1]
         if float(row[1]) < greatest_dec:
-                greatest_dec = float(row[1])
+                greatest_dec = float(row[1]) #make sure both values are float types due to decimal points
                 greatest_dec_date = row[0]
 
-print(greatest_dec)
-print(greatest_dec_date)
+# print (int(greatest_dec))
+# print (int(greatest_inc))
+# print (round(average_pl, 2))
+# print (int(total_profit_loss))
+
+output = (
+        f"Financial Analysis\n"
+        f"----------------------------\n"
+        f"Total Months: {total_months}\n"
+        f"Total: {'${}'.format(total_profit_loss)}\n"
+        f"Average Change: {'${}'.format(round(average_pl, 2))}\n"
+        f"Greatest Increase in Profits: {greatest_inc_date} ({'${}'.format(int(greatest_inc))})\n"
+        f"Greatest Decrease in Profits: {greatest_dec_date} ({'${}'.format(int(greatest_dec))})\n"
+)
+
+# In addition, your final script should both print the analysis to the terminal and export a text file with the results.
+print (output) #prints out to terminal
+
+with open(bank_output_file, "a") as txt_file: #outputs a .txt file to the Analysis folder
+        txt_file.write(output)
+
+
