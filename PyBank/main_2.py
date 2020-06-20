@@ -7,10 +7,11 @@ bank_output_file = os.path.join('Analysis', 'PyBank_output_file.txt')
 #print(bank_csv)
 
 # define variables
-total_months = 0
-total_profit_loss = 0
-greatest_inc = 0
-greatest_dec = 0
+total_months = [] #we need this list for an index value of the max/min
+total_profit_loss = 0 #this is a sum of all the p/l
+# greatest_inc = 0 #no longer needed because this should be 
+# greatest_dec = 0 
+profit_loss_delta = [] #need this to be a list of differences between each day. to capture use an append
 
 # Read in the CSV file
 with open(bank_csv , 'r') as csvfile:
@@ -27,7 +28,7 @@ with open(bank_csv , 'r') as csvfile:
         # The net total amount of "Profit/Losses" over the entire period
         total_profit_loss += int(row[1])
 
-        # The average of the changes in "Profit/Losses" over the entire period
+        # The average of the changes in "Profit/Losses" over the entire period. make sure we do one less 
         average_pl = total_profit_loss / total_months
 
         # The greatest increase in profits (date and amount) over the entire period
