@@ -56,18 +56,3 @@ print (output) #prints out to terminal
 
 with open(bank_output_file, "a") as txt_file: #outputs a .txt file to the Analysis folder
         txt_file.write(output)
-
-# print(great_month_index)
-# print(great_month)
-# print(least_month_index)
-# print(least_month)
-# print(greatest_inc)
-# print(greatest_dec)
-# print(profit_loss_delta)        
-# print(profit_loss)        
-# print(len(total_months))
-# print(total_profit_loss)
-# # print (int(greatest_dec))
-# # print (int(greatest_inc))
-# # print (round(average_pl, 2))
-# # print (int(total_profit_loss))
